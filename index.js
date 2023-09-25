@@ -1,9 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const path = require("path");
+const dotenv = require("dotenv");
 
-const app = express();
-const port = 3000;
+dotenv.config();
 
 const { NlpManager } = require('node-nlp');
 
@@ -34,7 +33,7 @@ manager.addAnswer('en', 'availability', 'Yes, we have cars available today.');
         res.json({ answer: response.answer || "Sorry, I can't answer that right now." });
     });
 
-    app.listen(port, () => {
+    app.listen(process.env.PORT || port, () => {
         console.log(
             `${new Date().toLocaleString()} - API Server Online - Worker PID: 
             ${process.pid} - ${port}`
